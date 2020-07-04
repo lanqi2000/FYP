@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login </title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		*{margin: 0px; padding: 0px;}
+		body{font-size: 100%; background-color: honeydew;}
+		.inputText {border:none; color : rgb(204, 204, 204); font-size: 1em; border-bottom: 2px solid #ccc; padding: 10px 2px; width: 400px;} 
+		.img{background-size: "";width: 100%; height: 170px; align-content: center;text-align: center;border-top-left-radius: 10px; border-top-right-radius: 10px; background-position: center; background-repeat: no-repeat;}
+		.txt1{text-decoration:none;color:black;}
+		.log{border-radius: 20px;width: 150px;padding:20px;display: inline-block; background-color: #56b942; border: 1px solid #18ab29;align-content:center;position: relative;}
+
+	</style>
+
+</head>
+<body>
+	
+	<div style="position: center;border: 0px solid rgba(226, 226, 226, 0.849); border-radius: 50px; background-color: #FFF;height: 500px; margin-left: 30%; margin-right: 30%; margin-top: 5%;">
+		<div>
+			<div style="border-radius:16px; align-content: center; text-align: center;">
+				<div  style="background-image: url(images/bg-01.jpg);" class="img">
+					<span style="font-size: 60px; text-align:center; color: white; position: relative; top: 50px; font-family: Arial, Helvetica, sans-serif; transform: translate(-50%,-50%);">
+						Sign In
+					</span>
+				</div>
+				<br><br>
+				<form action="verification.php" method="POST">
+					<div validate-input m-b-26 data-validate="Username is required">
+						<span style="margin-right: 30px;">Username</span>
+						<input type="text" name="username" placeholder="Enter username" class="inputText" required>
+						<span></span>
+					</div>
+					<br>
+					<div data-validate = "Password is required">
+						<span style="margin-right: 30px;">Password</span>
+						<input type="password" name="pass" placeholder="Enter password" class="inputText" required>
+						<span></span>
+					</div>
+					<br><br>
+					<div style="width:76%;display: inline-block;float: right;">
+						<div style="float:left; display:inline-block;">
+							<input id="ckb1" type="checkbox" name="remember-me">
+							<label  for="ckb1">
+								Remember me
+							</label>
+						</div>
+
+						<div style="float: right; display:inline-block; margin-right: 30%;">
+							<a href="#" class="txt1">
+								Forgot Password?
+							</a>
+						</div>
+					</div>
+					<br><br><br>
+					<div>
+						<button class="log">
+							Login
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>

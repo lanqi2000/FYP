@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head id="head">
+        <meta charset="utf-8">
+        <script src="https://unpkg.com/vue/dist/vue.js"></script>
+        <link rel="stylesheet" href="/SOURCE_CODE/CSS/CLUB/MEDIA/MEDIA.css">
+        <title>{{club}}</title>
+    </head>
+    <body>
+        <header>
+            <div>
+                HEADER
+            </div>
+            <br/>
+        </header>
+        <section>
+            <div id="container">
+                <div id="left">
+                    <a href="/SOURCE_CODE/HTML/CLUB/MEDIA.html">
+                        <div class="panel" id="A1">
+                            <div @mouseover="mouseOver" @mouseleave="mouseLeave" class="panel-icon">
+                                <img src="/SOURCE_CODE/ICON/PHONE.png" width="80px">
+                            </div>
+                            <div v-show="hover" class="panel-title">PICTURE/VIDEO</div>
+                        </div>
+                    </a>
+                    <a href="/SOURCE_CODE/HTML/CLUB/ACTIVITY/ACTIVITY.html">
+                        <div class="panel">
+                            <div @mouseover="mouseOver" @mouseleave="mouseLeave" class="panel-icon">
+                                <img src="/SOURCE_CODE/ICON/PHONE.png" width="80px">
+                            </div>
+                            <div v-show="hover" class="panel-title">CLUB ACTIVITY</div>
+                        </div>
+                    </a>
+                    <a href="/SOURCE_CODE/HTML/CLUB/COOPERATE_SYSTEM/COOPERATE_SYSTEM.html">
+                        <div class="panel">
+                            <div @mouseover="mouseOver" @mouseleave="mouseLeave" class="panel-icon">
+                                <img src="/SOURCE_CODE/ICON/PHONE.png" width="80px">
+                            </div>
+                            <div v-show="hover" class="panel-title">COOPERATE SYSTEM</div>
+                        </div>                            
+                    </a>
+                    <a href="/SOURCE_CODE/HTML/CLUB/CLUB_HISTORY.html">
+                        <div class="panel" >
+                            <div @mouseover="mouseOver" @mouseleave="mouseLeave" class="panel-icon">
+                                <img src="/SOURCE_CODE/ICON/PHONE.png" width="80px">
+                            </div>
+                            <div v-show="hover" class="panel-title">CLUB HISTORY</div>
+                        </div>
+                    </a>
+                    <a href="/SOURCE_CODE/HTML/CLUB/ABOUT_CLUB.html">
+                        <div class="panel" style="border:none">
+                            <div @mouseover="mouseOver" @mouseleave="mouseLeave" class="panel-icon">
+                                <img src="/SOURCE_CODE/ICON/PHONE.png" width="80px">
+                            </div>
+                            <div v-show="hover" class="panel-title">ABOUT CLUB</div>
+                        </div>
+                    </a>
+                </div>
+                <div id="right">
+                    <div id="m-container" style="width: 100%; height: 100%;">
+                        <div class="media">
+                            <h1 height="10px" style="width: 100%;">MEDIA</h1>
+                            <div class="bar">
+                                <div class="m-title">photo</div>
+                                <a href="PICTURE.html" class="m-media">
+                                    <img alt="poster" src="/SOURCE_CODE/IMAGE/POSTER.jpg" height="100%">
+                                </a>
+                            </div>
+                            <div class="bar" style="border-bottom: gray 1px solid;">
+                                <div class="m-title">video</div>
+                                <a href="VIDEO.html" class="m-media">
+                                    <img alt="poster" src="/SOURCE_CODE/IMAGE/POSTER.jpg" height="100%">
+                                </a>
+                            </div>
+                            <h1 height="10px" style="width: 100%;">ACTIVITY</h1>
+                            <div class="bar">
+                                <div class="m-title">activity</div>
+                                <div class="m-media">                                
+                                    <div class="m-media">
+                                        photo
+                                    </div>
+                                    <div class="m-media">
+                                        video
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bar">
+                                <div class="m-title">activity</div>
+                                <div class="m-media">                                
+                                    <div class="m-media">
+                                        photo
+                                    </div>
+                                    <div class="m-media">
+                                        video
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="clearfloat"></div>
+                </div>
+            </div>
+            <div id="message">M</div>
+            <div id="ARF" title="ANONYMOUS RATING & FEEDBACK">ARF</div>
+        </section>
+        
+        <script>
+            var head = new Vue({
+                el:'#head',
+                data:{
+                    club:'TEETH CLUB'
+                },
+            });
+            var body = new Vue({
+                el:'#left',
+                data:{
+                    hover:false,
+                },
+                methods:{
+                    mouseOver:function(){
+                        this.hover=true;
+                    },
+                    mouseLeave:function(){
+                        this.hover=false;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

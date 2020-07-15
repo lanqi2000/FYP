@@ -1,0 +1,133 @@
+.clearfloat{
+    clear: both;
+}
+html,body{
+    margin: 0;
+    height: 100%;
+    background-color:antiquewhite;
+}
+header{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+    font-size: 80px;
+    height: 180px;
+    
+}
+#ARF{
+    position: fixed;
+    margin-left: 45%;
+    top: 70%;
+    background-color: blue;
+    
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#message{
+    position: fixed;
+    margin-left: 45%;
+    top: 85%;
+    background-color: blue;
+    
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+section{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
+}
+#container{
+    margin-top: 40px; 
+    width: 1300px;
+    height: 100%;
+    background-color: sandybrown;
+    display: flex;
+}
+#left{
+    box-sizing: border-box;
+    font-size: 25px;
+    
+    display:flex;
+    flex-direction: column;
+    position:absolute;
+}
+.panel{
+    display: flex;
+    background-color:antiquewhite;
+}
+.panel-icon{
+    box-sizing: border-box;
+    height: 120px;
+    text-align: center;
+    padding: 20px 20px;
+    border-bottom: 1px lightseagreen solid;
+    
+}
+.panel-title{
+    box-sizing: border-box;
+    background-color: green;
+    color: aliceblue;
+    position: relative;
+    height: 120px;
+    flex-basis: 300px;
+    width: 300px;
+    padding: 10px;
+    text-align: center;
+    padding-top: 25px;
+    border-radius: 30px;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    background-color: lightseagreen;
+}
+
+#right{
+    box-sizing: border-box;
+    background-color: azure;
+    width:100%;
+    height: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    display: flex;
+}
+
+.activity{
+    box-sizing: border-box;
+    padding: 80px 100px 100px;
+    width: 100%;
+    height: 100vh;
+}
+
+.ACT{
+    margin-bottom: 30px;
+    width: 840px;
+    height: 100%;
+    overflow: scroll;
+}
+
+.year{
+    text-align: center;
+    line-height: 2.5;
+    position: relative;
+    top: -34px;
+    display: flex;
+    flex-direction: row;
+}
+
+.year>div{
+    min-width: 200px;
+    background-color: aqua;
+    margin-right: 200px;
+}

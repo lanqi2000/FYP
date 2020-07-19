@@ -4,59 +4,31 @@
         <meta charset="utf-8">
         <script src="https://unpkg.com/vue/dist/vue.js"></script>
         <link rel="stylesheet" href="/SOURCE_CODE/CSS/CLUB/CLUB.css">
+        <!--google font-->
+        <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
         <title>{{club}}</title>
     </head>
     <body>
         <header>
-            <div>
-                HEADER
+            <div class="login">
+                <a href="#">login</a>
+                <a href="#">register</a>
+            </div>
+            <div class="loggedin"></div>
+            <div class="hd">
+                C<spam>lub . </spam>I<spam>nteraction . </spam>P<spam>latform</spam>
             </div>
             <br/>
         </header>
         <section>
+            
             <div id="container">
+                
                 <div id="left">
-                    <a href="/SOURCE_CODE/HTML/CLUB/MEDIA.html">
-                        <div class="panel" id="A1">
-                            <div @mouseover="mouseOver" @mouseleave="mouseLeave" class="panel-icon">
-                                <img src="/SOURCE_CODE/ICON/PHONE.png" width="80px">
-                            </div>
-                            <div v-show="hover" class="panel-title">PICTURE/VIDEO</div>
-                        </div>
-                    </a>
-                    <a href="/SOURCE_CODE/HTML/CLUB/ACTIVITY/ACTIVITY.html">
-                        <div class="panel">
-                            <div @mouseover="mouseOver" @mouseleave="mouseLeave" class="panel-icon">
-                                <img src="/SOURCE_CODE/ICON/PHONE.png" width="80px">
-                            </div>
-                            <div v-show="hover" class="panel-title">CLUB ACTIVITY</div>
-                        </div>
-                    </a>
-                    <a href="/SOURCE_CODE/HTML/CLUB/COOPERATE_SYSTEM/COOPERATE_SYSTEM.html">
-                        <div class="panel">
-                            <div @mouseover="mouseOver" @mouseleave="mouseLeave" class="panel-icon">
-                                <img src="/SOURCE_CODE/ICON/PHONE.png" width="80px">
-                            </div>
-                            <div v-show="hover" class="panel-title">COOPERATE SYSTEM</div>
-                        </div>                            
-                    </a>
-                    <a href="/SOURCE_CODE/HTML/CLUB/CLUB_HISTORY.html">
-                        <div class="panel" >
-                            <div @mouseover="mouseOver" @mouseleave="mouseLeave" class="panel-icon">
-                                <img src="/SOURCE_CODE/ICON/PHONE.png" width="80px">
-                            </div>
-                            <div v-show="hover" class="panel-title">CLUB HISTORY</div>
-                        </div>
-                    </a>
-                    <a href="/SOURCE_CODE/HTML/CLUB/ABOUT_CLUB.html">
-                        <div class="panel" style="border:none">
-                            <div @mouseover="mouseOver" @mouseleave="mouseLeave" class="panel-icon">
-                                <img src="/SOURCE_CODE/ICON/PHONE.png" width="80px">
-                            </div>
-                            <div v-show="hover" class="panel-title">ABOUT CLUB</div>
-                        </div>
-                    </a>
+                    <left-bar v-for="h in hover" :hover="h.status" :link="h.links" :icon="h.icons" :title="h.titles"></left-bar>
                 </div>
+                
                 <div id="right">
                     <div id="logo">
                         <div id="l-img">
@@ -82,30 +54,73 @@
                     </div>
                 <div class="clearfloat"></div>
                 </div>
+                
             </div>
-            <div id="message">M</div>
-            <div id="ARF" title="ANONYMOUS RATING & FEEDBACK">ARF</div>
+            
+            <div id="c-container">
+                <div id="message" @click="chat=!chat">
+                    <img src="/SOURCE_CODE/ICON/chat.png" width="30px" style="filter: invert(100%)">
+                </div>
+                <div class="chat" v-if="chat">New message</div>
+            </div>
+            
+            <div id="ARF" title="ANONYMOUS RATING & FEEDBACK">
+                <img src="/SOURCE_CODE/ICON/customer-review.png" width="30px" style="filter: invert(100%)">
+            </div>
+            
         </section>
         
         <script>
+            Vue.component('left-bar',{
+                props:['hover','link','icon','title'],
+                template:'<a :href="link"><div class="panel" id="A1"><div @mouseover="hover=!hover" @mouseleave="hover=!hover" class="panel-icon"><img :src="icon" width="40px"></div><div v-if="hover" class="panel-title" >{{title}}</div></div></a>'
+            });
             var head = new Vue({
                 el:'#head',
                 data:{
                     club:'TEETH CLUB'
                 },
             });
-            var body = new Vue({
+            var left = new Vue({
                 el:'#left',
                 data:{
-                    hover:false,
+                    hover:[
+                        {
+                            titles:'PICTURE/VIDEO', 
+                            status:false,
+                            links:"/SOURCE_CODE/HTML/CLUB/MEDIA.html",
+                            icons:"/SOURCE_CODE/ICON/PHONE.png"
+                        },
+                        {
+                            titles:'CLUB ACTIVITY', 
+                            status:false,
+                            links:"/SOURCE_CODE/HTML/CLUB/ACTIVITY/ACTIVITY.html",
+                            icons:"/SOURCE_CODE/ICON/PHONE.png"
+                        },
+                        {
+                            titles:'COOPERATE SYSTEM', 
+                            status:false, links:"/SOURCE_CODE/HTML/CLUB/COOPERATE_SYSTEM/COOPERATE_SYSTEM.html",
+                            icons:"/SOURCE_CODE/ICON/document.png"
+                        },
+                        {
+                            titles:'CLUB HISTORY', 
+                            status:false,
+                            links:"/SOURCE_CODE/HTML/CLUB/CLUB_HISTORY.html",
+                            icons:"/SOURCE_CODE/ICON/PHONE.png"
+                        },
+                        {
+                            titles:'ABOUT CLUB', 
+                            status:false,
+                            links:"/SOURCE_CODE/HTML/CLUB/ABOUT_CLUB.html",
+                            icons:"/SOURCE_CODE/ICON/PHONE.png"
+                        },
+                    ]
                 },
-                methods:{
-                    mouseOver:function(){
-                        this.hover=true;
-                    },
-                    mouseLeave:function(){
-                        this.hover=false;
-                    }
+            });
+            var message = new Vue({
+                el:'#c-container',
+                data:{
+                    chat:false
                 }
             });
         </script>

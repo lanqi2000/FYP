@@ -4,42 +4,92 @@
 
 body{
     margin: 0;
+    background: #f0f2f5;
+    font-family: 'Montserrat',Verdana, Geneva, sans-serif;
 }
 
 header{
     display:flex;
     justify-content: center;
     align-items: center;
-    background-color: aqua;
+    height: 50vh;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.32);
+    background-image: url('/SOURCE_CODE/IMAGE/volcano-1905556.jpg');
+    background-size: cover;
+}
+.login{
+    position: absolute;
+    top:10px;
+    right: 10px;
+    color: white;
+}
+.login>a{
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+}
+.login>a:active{
+    color: white;
+}
+.login>a:hover{
+    color: lightblue;
+}
+.hd{
+    position: absolute;
+    font-family: 'monoton';
     font-size: 80px;
-    height: 180px;
-    
+    padding: 0 50px;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.16);
+    background-image: url('/SOURCE_CODE/IMAGE/light-1282314.jpg');
+    border-radius: 10px;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.hd>spam{
+    font-size: 40px;
+    font-family: ;
 }
 
 #ARF{
     position: fixed;
-    margin-left: 45%;
+    right:30px;
     top: 70%;
-    background-color: blue;
-    
-    height: 80px;
-    width: 80px;
+    background-color: #343959;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.3);
+    height: 60px;
+    width: 60px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-}#message{
+}
+#message{
     position: fixed;
-    margin-left: 45%;
+    right:30px;
     top: 85%;
-    background-color: blue;
-    
-    height: 80px;
-    width: 80px;
+    background-color: #343959;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.3);
+    height: 60px;
+    width: 60px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.chat{
+    position: fixed;
+    background-color: #343959;
+    height: 330px;
+    width: 250px;
+    right:100px;
+    bottom: 10px;
+    border-radius: 20px;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.6);
+    animation-name: out;
+    animation-duration: 250ms;
+    box-sizing: border-box;
+    padding:10px 20px;
+    color: white;
 }
 section{
     display: flex;
@@ -50,32 +100,35 @@ section{
     margin-top: 40px; 
     width: 1600px;
     height: 100%;
-    background-color: sandybrown;
     display: flex;
 }
 
 #left{
     box-sizing: border-box;
     font-size: 25px;
-    
     display:flex;
     flex-direction: column;
-    position:absolute;
+    overflow: auto;
+    position:sticky;
+    top:0;
+    height: 1000px;
 }
 
 .panel{
     display: flex;
-    background-color:antiquewhite;
 }
 
 .panel-icon{
     box-sizing: border-box;
-    height: 120px;
     text-align: center;
-    padding: 20px 20px;
-    border-bottom: 1px lightseagreen solid;
-    
+    background-color: aquamarine;
+    border-radius: 500px;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 
 .panel-title{
     box-sizing: border-box;
@@ -89,14 +142,16 @@ section{
     text-align: center;
     padding-top: 25px;
     border-radius: 30px;
+    animation-name: out;
+    animation-duration: 250ms;
 }
-
+@keyframes out{
+    0%{transform: scaleX(0)}
+    100%{transform: scaleX(1)}
+}
 
 a{
     text-decoration: none;
-}
-a:hover{
-    background-color: lightseagreen;
 }
 
 #right{
@@ -111,6 +166,9 @@ a:hover{
 #logo{
     display: flex;
     justify-content: center;
+    
+    animation-name: out;
+    animation-duration: 4s;
 }
 
 #l-img{
@@ -119,9 +177,9 @@ a:hover{
 }
 
 #banner{
-                display: flex;
-                justify-content: center;
-            }
+    display: flex;
+    justify-content: center;
+}
 
 #b-img{
     width:720px;

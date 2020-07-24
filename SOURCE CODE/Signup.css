@@ -1,0 +1,20 @@
+<style>
+            h1{
+                text-align: center;
+                
+            }
+            fieldset{
+                text-align: start;
+                background: lightgray;
+            }
+            label{
+                color: darkcyan;
+            }
+            input, textarea:hover{
+                background: lightyellow;
+            }
+            button{
+            font-size: 20px;
+            background: lightskyblue;
+            }
+        </style>

@@ -1,0 +1,92 @@
+body{
+    margin: 0;
+    background: #f0f2f5;
+    font-family: 'Montserrat',Verdana, Geneva, sans-serif;
+}
+
+header{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.32);
+    background-image: url('/SOURCE_CODE/TEMPLATE/volcano-1905556.jpg');
+    background-size: cover;
+}
+
+.login{
+    position: absolute;
+    top:10px;
+    right: 10px;
+    color: white;
+}
+.login>a{
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+}
+.login>a:active{
+    color: white;
+}
+.login>a:hover{
+    color: lightblue;
+}
+
+.hd{
+    position: absolute;
+    font-family: 'monoton';
+    font-size: 80px;
+    padding: 0 30px;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.16);
+    background-image: url('/SOURCE_CODE/TEMPLATE/light-1282314.jpg');
+    border-radius: 10px;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 130px;
+    width: 784px;
+    text-align: center;
+    word-spacing: 10px;
+}
+.hd>spam{
+    font-size: 40px;
+    font-family: ;
+}
+
+#message{
+    position: fixed;
+    right:30px;
+    top: 85%;
+    background-color: #343959;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.3);
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.chat{
+    position: fixed;
+    background-color: #343959;
+    height: 330px;
+    width: 250px;
+    right:100px;
+    bottom: 10px;
+    border-radius: 20px;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.6);
+    animation-name: out;
+    animation-duration: 250ms;
+    box-sizing: border-box;
+    padding:10px 20px;
+    color: white;
+}
+
+section{
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes out{
+    0%{transform: scaleX(0)}
+    100%{transform: scaleX(1)}
+}

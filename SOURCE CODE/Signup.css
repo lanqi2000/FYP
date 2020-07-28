@@ -5,16 +5,19 @@
             }
             fieldset{
                 text-align: start;
-                background: lightgray;
+                background: lightblue;
             }
             label{
-                color: darkcyan;
+                color: black;
             }
             input, textarea:hover{
                 background: lightyellow;
             }
             button{
             font-size: 20px;
-            background: lightskyblue;
+            background: white;
             }
+            button:hover{
+            background: lightskyblue;
+        }
         </style>

@@ -1,19 +1,20 @@
 <style>
         body{
-                background-color: white;
+                background-color: lightgrey;
             }
         fieldset{
             text-align: center;
+            background: lightblue;
         }
         label{
             text-align: center;
         }
         button{
             font-size: 20px;
-            background: lightskyblue;
+            background: white;
         }
         button:hover{
-            background: lightslategray;
+            background: lightskyblue;
         }
         a{
             color: maroon;

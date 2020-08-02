@@ -1,0 +1,32 @@
+.picture{
+    box-sizing: border-box;
+    padding: 80px 50px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+#box{
+    background-color: darkseagreen;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.p-box{
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: 250px;
+    background-color: antiquewhite;
+    margin:20px;
+
+}
+.preview{
+    background-color: black;
+    height: 180px;
+    width: 100%;
+}
+
+

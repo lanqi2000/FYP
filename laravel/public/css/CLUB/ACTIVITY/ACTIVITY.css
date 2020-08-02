@@ -1,0 +1,27 @@
+.activity{
+    box-sizing: border-box;
+    padding: 80px 100px 100px;
+    width: 100%;
+    height: auto;
+}
+
+.ACT{
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.a-media{
+    box-sizing: border-box;
+    background-color: black;
+    width: 400px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+}
+.a-caption{
+    background-color: blanchedalmond;
+    width: 380px;
+    height: 250px;
+    box-sizing: border-box;
+    padding: 20px;
+}

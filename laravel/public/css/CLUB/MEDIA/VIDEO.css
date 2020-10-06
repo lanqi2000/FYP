@@ -1,27 +1,87 @@
+.SP{
+    z-index: 1000;
+}
+.backGround{
+    position: fixed;
+    background-color: black;
+    top: 0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.8;
+    z-index: 100;
+}
+.showPic{
+    position: fixed;
+    top: 0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1001;
+}
+.exit{
+    width: 40px;
+    height: 40px;
+    background-color: #bcbcbc;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    right: 3%;
+    top: 3%;
+}
+.arrowPic{
+    height: 40px;
+    width: 30px;
+    background-color: #bcbcbc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+.vid{
+    width: 70%;
+    height: 70%;
+    margin: 8% 15% 0 15%;
+    background-color: #1d643b;
+}
+.v-caption {
+    background-color: #343959;
+    height: 30px;
+    width: 70%;
+    margin-left: 15%;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
 .video{
     box-sizing: border-box;
-    padding: 80px 50px;
+    padding: 0 50px;
     width: 100%;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
 }
-#box{
-    background-color: darkseagreen;
+.box{
     box-sizing: border-box;
     width: 100%;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
 .v-box{
     display: flex;
     flex-direction: column;
     height: 200px;
-    width: 250px;
-    background-color: antiquewhite;
+    width: 240px;
+    background-color: #343959;
     margin:20px;
-
+    box-sizing:border-box;
+    color: white;
 }
 .preview{
     background-color: black;

@@ -1,0 +1,42 @@
+.mm-container{
+    width: 800px;
+    margin:50px 80px;
+    color: white;
+}
+.list{
+    border-collapse: collapse;
+    background-color: #656C8F;
+    width: 100%;
+    margin-top: 30px;
+}
+.list *{
+    border-collapse: collapse;
+}
+.list-element{
+    border-left: #343959 2px dashed;
+    border-right: #343959 2px dashed;
+    box-sizing: border-box;
+    padding: 10px 10px;
+    overflow-x: hidden;
+}
+.list-header{
+    border-bottom: #343959 3px solid;
+}
+.list-header *{
+    border: none;
+}
+.list-body{
+    max-height: 200px;
+    overflow: auto;
+    width: 816px;
+}
+.edit-button{
+    background-color: #cebf1c;
+    padding: 3px 0;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+.clecklistselect{
+    background-color: indianred;
+}

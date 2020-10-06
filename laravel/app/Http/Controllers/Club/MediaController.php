@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Club;
 
 use Illuminate\Http\Request;
 
-class MediaController extends CommenController
+class MediaController extends CommonController
 {
     public function meida(){
         return view('CLUB.MEDIA.MEDIA');

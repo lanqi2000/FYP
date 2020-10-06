@@ -1,51 +1,94 @@
-.form{
-    box-sizing: border-box;
-    padding: 80px 100px 100px;
-    width: 100%;
-    height: 100%;
+#f-container{
+    width: 800px;
+    margin:50px auto;
 }
-
-form{
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 30px;
-    width: 100%;
-}
-
-.f-info{
-    background-color: blanchedalmond;
-    width: 100%;
-    height: 450px;
+/*Application Form*/
+.activity-apply-form{
+    width: 680px;
+    background-color: #343959;
+    margin: 30px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.3);
+    padding: 50px 80px;
+    color: white;
     box-sizing: border-box;
+}
+.form-body{
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+.form-box{
+    border-radius: 10px;
+    width: 100%;
     padding: 20px;
-}
-h3{
-    margin: 30px;
-    text-align: center;
-}
-.info{
     box-sizing: border-box;
     display: flex;
-    width: 100%;
-    justify-content: space-around;
-    margin-bottom: 20px;
+    flex-direction: column;
 }
-.info>p{
-    margin: 0;
+.form-box .edit{
+    margin-left: 10px;
 }
-.f-panel{
-    width: 100%;
-    height: 100px;
-    background-color: aqua;
+.form-label{
+    color: white;
+    opacity: 0.5;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.form-input{
+    background-color: #343959;
+    border: none;
+    border-bottom: #6c757d solid 2px;
+    color: white;
+    font-size: 16px;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+.form-input:focus{
+    outline: none;
+}
+.input-radio-checkbox{
+    margin: 10px 0 0;
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: space-around
 }
-.f-panel>a{
-    width: 300px;
-    height: 50px;
-    text-align: center;
-    border: 1px black solid;
-    background-color: gray;
-    line-height: 50px;
+.input-file{
+    border: none;
+    padding-left: 0;
+}
+.form-panel{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.form-submit, .form-reset, .form-cancel{
+    color: black;
+    font-weight: bold;
+    background-color: white;
+}
+.form-submit:hover{
+    background-color: #55ba55;
+}
+.form-reset:hover{
+    background-color: darkgoldenrod;
+}
+.form-cancel:hover{
+    background-color: indianred;
+}
+.setInput-panel{
+    margin-top: 50px;
+    border-top: 1px solid white;
+    padding-top: 15px;
+}
+.input-button{
+    filter: invert(100%);
+    border: 1px solid black;
+    border-radius: 10%;
+    padding: 2px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+.input-button:hover{
+    filter: invert(70%) sepia(86%) saturate(793%) hue-rotate(132deg) brightness(91%) contrast(95%);
 }

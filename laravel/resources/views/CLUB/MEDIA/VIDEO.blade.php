@@ -4,57 +4,47 @@
 @endsection
 @section('b-ctemplate')
     <div id="v-container" style="width: 100%; height: 100%;">
-        <div v-if="trigger" style="display: none;"></div>
-        <div v-else="trigger">
-            <div class="showPicture" style="background-color: black; height: 100%; width: 1011px; position: absolute; display: flex; justify-content: center; align-items: center;">
-                <div id="frame" style="background-color: aliceblue; height: 400px; width: 400px;">
-                    <video style="height: 70%; width: 100%;"></video>
-                    <div style="background-color:wheat; display: flex; height: 30%;width: 100%;">asda</div>
-                </div>
-                <div @click="showPicture" style="height: 20px; background-color:chartreuse; width: 20px; position: absolute; text-align: center; left:95%; top:5%;">X</div>
+        <div class="SP" v-if="trigger">
+            <div class="backGround"></div>
+            <div class="showPic" >
+                <div class="exit" @click="showPicture">X</div>
+                <div class="arrowVid" style="top:50%; left:10%;"><</div>
+                <div class="arrowVid" style="top:50%; right:10%;">></div>
+                <div class="vid">@{{ pic.picture }}</div>
+                <div class="v-caption">@{{ pic.caption }}</div>
             </div>
         </div>
         <div class="video">
-            <h1 height="10px" style="width: 100%;">VIDEO</h1>
-            <div id="box">
-                <div class="v-box">
-                    <div @click="showPicture" class="preview"></div>
-                    <div class="v-title">First Video</div>
-                </div>
-                <div class="v-box">
-                    <div class="preview"></div>
-                    <div class="v-title">First Video</div>
-                </div>
-                <div class="v-box">
-                    <div class="preview"></div>
-                    <div class="v-title">First Video</div>
-                </div>
-                <div class="v-box">
-                    <div class="preview"></div>
-                    <div class="v-title">First Video</div>
-                </div>
-                <div class="v-box">
-                    <div class="preview"></div>
-                    <div class="v-title">First Video</div>
-                </div>
-                <div class="v-box">
-                    <div class="preview"></div>
-                    <div class="v-title">First Video</div>
-                </div>
-                <div class="v-box">
-                    <div class="preview"></div>
-                    <div class="v-title">First Video</div>
-                </div>
-                <div class="v-box">
-                    <div class="preview"></div>
-                    <div class="v-title">First Video</div>
-                </div>
+            <h1 class="header" style="width: 200px; margin-left: -50px;">VIDEO</h1>
+            <div class="box">
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
+                <picture-box></picture-box>
             </div>
         </div>
     </div>
 @endsection
 @section('s-ctemplate')
     <script>
+        var bus = new Vue();
         var head = new Vue({
             el:'#head',
             data:{
@@ -62,13 +52,39 @@
             },
         });
         var body = new Vue({
-            el:'#container',
+            el:'#v-container',
             data:{
-                trigger:true,
+                trigger:false,
+                pic:{
+                    picture:'video',
+                    caption:'caption',
+                }
             },
             methods:{
-                showPicture:function(){
+                showPicture(){
                     this.trigger=!this.trigger;
+                }
+            },
+            mounted() {
+                bus.$on(
+                    "myshow",()=>{
+                        this.showPicture();
+                    }
+                )
+            },
+            components: {
+                "picture-box": {
+                    props: [],
+                    template: `
+                <div class="v-box" @click="myclick">
+                    <div class="preview"></div>
+                    <div class="v-title">VIDEO</div>
+                </div>`,
+                    methods: {
+                        myclick() {
+                            bus.$emit("myshow");
+                        }
+                    }
                 }
             }
         });

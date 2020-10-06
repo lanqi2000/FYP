@@ -3,75 +3,15 @@
     <link rel="stylesheet" href="{{asset('public/css/CLUB/CLUB_HISTORY.css')}}">
 @endsection
 @section('b-ctemplate')
-    <div id="a-container" style="width: 100%; height: 100%">
+    <h1 class="header"style="width: 200px;">CLUB HISTORY</h1>
+    <div class="a-container">
         <div class="activity">
-            <div class="ACT">
-                <svg style="width:1000%; height: 40px;">
-                    <line x1="0" y1="30px" x2="100%" y2="30px" style="stroke:black; stroke-width:2"/>
-                </svg>
-                <div class="year" style="left: 0;">
-                    <div>
-                        <div>2020</div>
-                        <div>
-                            <ul>
-                                <li>activity 1</li>
-                                <li>activity 2</li>
-                                <li>activity 3</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <div>2020</div>
-                        <div>
-                            <ul>
-                                <li>activity 1</li>
-                                <li>activity 2</li>
-                                <li>activity 3</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <div>2020</div>
-                        <div>
-                            <ul>
-                                <li>activity 1</li>
-                                <li>activity 2</li>
-                                <li>activity 3</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <div>2020</div>
-                        <div>
-                            <ul>
-                                <li>activity 1</li>
-                                <li>activity 2</li>
-                                <li>activity 3</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <div>2020</div>
-                        <div>
-                            <ul>
-                                <li>activity 1</li>
-                                <li>activity 2</li>
-                                <li>activity 3</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div>
-                        <div>2020</div>
-                        <div>
-                            <ul>
-                                <li>activity 1</li>
-                                <li>activity 2</li>
-                                <li>activity 3</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <div class="yearContainer">
+                <div class="arrowYear" style="border-top-left-radius: 2px ; border-bottom-left-radius: 2px; "><</div>
+                <div class="year">@{{ year }}</div>
+                <div class="arrowYear" style="border-top-right-radius: 2px ; border-bottom-right-radius: 2px; ">></div>
             </div>
+            <div class="content">slot</div>
         </div>
     </div>
 @endsection

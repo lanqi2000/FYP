@@ -1,0 +1,72 @@
+#media-management{
+    width: 800px;
+    margin:50px 80px;
+}
+.mm-header{
+    width: 240px;
+    height: 40px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #343959;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.mm-box{
+    height: 350px;
+    width: 100%;
+    border-radius: 15px;
+    background-color: #343959;
+    margin: 30px 0;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+}
+.mm-box-left{
+    height: 100%;
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.preview{
+    background-color: black;
+    width: 435px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.preview-arrow{
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    opacity: 0.5;
+    margin: 0 5px;
+    cursor: pointer;
+}
+.preview-arrow:hover{
+    opacity: 1;
+    transition: all 0.2s;
+}
+
+.mm-box-right{
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    align-items: center;
+    justify-content: center;
+}
+.myButton{
+    padding-left: 37px;
+}
+.activity-selection{
+    margin-bottom: 20px;
+    width: 150px;
+}
+.myButton_small{
+    margin-bottom: 20px;
+}

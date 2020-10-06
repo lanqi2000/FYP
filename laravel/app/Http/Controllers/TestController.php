@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\DB;
 class TestController extends Controller
 {
     public function index(){
-        $pdo=DB::connection()->getPdo();
+        echo 'sss';
+        $pdo = DB::connection()->getPdo();
         dd($pdo);
     }
 }

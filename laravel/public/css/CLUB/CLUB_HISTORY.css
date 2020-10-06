@@ -1,28 +1,47 @@
-.activity{
+.a-container{
     box-sizing: border-box;
-    padding: 80px 100px 100px;
+    padding: 50px 100px 30px;
     width: 100%;
-    height: 100vh;
-}
-
-.ACT{
-    margin-bottom: 30px;
-    width: 840px;
     height: 100%;
-    overflow: scroll;
+    color: white;
 }
 
-.year{
-    text-align: center;
-    line-height: 2.5;
-    position: relative;
-    top: -34px;
+.activity{
     display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.yearContainer{
+    display: flex;
+    justify-content: center;
     flex-direction: row;
+    width: 100%;
+}
+.yearContainer div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.arrowYear{
+    background-color: #343959;
+    height: 30px;
+    width: 20px;
+}
+.year{
+    background-color: #464c6e;
+    height: 30px;
+    width: 70px;
+}
+.content{
+    background-color: #343959;
+    width: 100%;
+    height: calc(100% - 60px);
+    margin: 30px 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    border-radius: 5px;
 }
 
-.year>div{
-    min-width: 200px;
-    background-color: aqua;
-    margin-right: 200px;
-}

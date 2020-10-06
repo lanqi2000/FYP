@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Intervention\Image\Facades\Image;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,31 +17,84 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+//Route::get('/', function()
+//{
+//    $img = Image::make('https://images.pexels.com/photos/4273439/pexels-photo-4273439.jpeg')->resize(300, 200); // 這邊可以隨便用網路上的image取代
+//    return $img->response('jpg');
+//});
 
 Route::get('/test', 'TestController@index');
-
 //TEMPLATE
 Route::get('/template','TemplateController@template');
 Route::get('/ctemplate','TemplateController@ctemplate');
+Route::any('/ctemplate-feedback','TemplateController@feedback');
+Route::any('/ctemplate-feedback-input','TemplateController@feedbackInput');
 
 //PERSONAL PROFILE
-Route::get('/pProfile','pProfileController@pProfile');
+Route::any('/pProfile','pProfileController@pProfile');
+Route::any('pProfile_input','pProfileController@input');
 
-//CLUB
-Route::get('/club','Club\ClubController@club');
-Route::get('/club/history','Club\ClubController@history');
-Route::get('/club/about','Club\ClubController@about');
+Route::group(['prefix'=>'club','namespace'=>'Club'],function(){
+    //CLUB
+    Route::get('/','ClubController@club');
+    Route::any('/club-input-like','ClubController@inputLike');
+    Route::any('/club-input-comment','ClubController@inputComment');
+    //HISTORY
+    Route::get('history','HistoryController@history');
+    //ABOUT
+    Route::get('about','AboutController@about');
+    //ACTIVITY
+    Route::get('activity','ActivityController@activity');
+    Route::get('rActivity/{id}','ActivityController@rActivity');
+    Route::get('aActivity/{id}','ActivityController@aActivity');
+    Route::any('aActivity-input/{id}','ActivityController@input');
+    Route::get('pActivity/{id}','ActivityController@pActivity');
+    //COOPERATE SYSTEM
+    Route::get('cSystem','cSystemController@cSystem');
+    //MEDIA
+    Route::get('media','MediaController@meida');
+    Route::get('picture','MediaController@picture');
+    Route::get('video','MediaController@video');
+    //MANAGEMENT SYSTEM
+    Route::group(['namespace'=>'CMS'],function(){
+        Route::get('cms','CMSController@CMS');
 
-//ACTIVITY
-Route::get('/club/activity','Club\ActivityController@activity');
-Route::get('/club/aActivity','Club\ActivityController@aActivity');
-Route::get('/club/pActivity','Club\ActivityController@pActivity');
-Route::get('/club/rActivity','Club\ActivityController@rActivity');
+        //post
+        Route::get('cmsPost','CMSPostController@CMSPost');
+        Route::any('cmsPost-input','CMSPostController@input');
+        Route::any('cmsPost-editGet','CMSPostController@editGet');
+        Route::any('cmsPost-editSave','CMSPostController@editSave');
+        Route::any('cmsPost-delete','CMSPostController@delete');
 
-//COOPERATE SYSTEM
-Route::get('/club/cSystem','Club\cSystemController@cSystem');
+        Route::get('cmsAdvertisement','CMSAdvertisementController@CMSAdvertisement');
 
-//MEDIA
-Route::get('/club/media','Club\MediaController@meida');
-Route::get('/club/picture','Club\MediaController@picture');
-Route::get('/club/video','Club\MediaController@video');
+        //activity
+        Route::get('cmsActivity','CMSActivityController@CMSActivity');
+        Route::any('cmsActivity-input','CMSActivityController@input');
+        Route::any('cmsActivity-editGet','CMSActivityController@editGet');
+        Route::any('cmsActivity-editSave','CMSActivityController@editSave');
+        Route::any('cmsActivity-delete','CMSActivityController@delete');
+        Route::any('cmsActivity-getResponse','CMSActivityController@getResponse');
+        Route::any('cmsActivity-updateResponse','CMSActivityController@updateResponse');
+        Route::any('cmsActivity-checkResponse','CMSActivityController@checkResponse');
+        Route::any('cmsActivity-getActivity','CMSActivityController@getActivity');
+        Route::any('cmsActivity-getFeedback','CMSActivityController@getFeedback');
+
+
+        Route::get('cmsMedia','CMSMediaController@CMSMedia');
+        Route::any('cmsMedia-getActivity','CMSMediaController@getActivity');
+        Route::any('cmsMedia-upload/{c}','CMSMediaController@upload');
+        Route::any('cmsMedia-inputMedia/{c}','CMSMediaController@inputMedia');
+        Route::any('cmsMedia-input/{c}','CMSMediaController@input');
+        Route::any('cmsMedia-deleteMedia/{c}','CMSMediaController@deleteMedia');
+
+        Route::get('cmsCooperation','CMSCooperationController@CMSCooperation');
+        Route::get('cmsMember','CMSMemberController@CMSMember');
+        Route::get('cmsHistory','CMSHistoryController@CMSHistory');
+        Route::get('cmsInfo','CMSInfoController@CMSInfo');
+    });
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

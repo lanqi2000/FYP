@@ -1,0 +1,32 @@
+.ads-management{
+    display: flex;
+    flex-direction: column;
+}
+.ads-preview{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.ads-image{
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-top: 30px;
+}
+.arrow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 30px;
+    color: white;
+    opacity: 0.5;
+    position: absolute;
+    cursor: pointer;
+    height: 22px;
+}
+.arrow:hover{
+    opacity: 1;
+    filter: contrast(200%);
+    transition: all 0.3s;
+}

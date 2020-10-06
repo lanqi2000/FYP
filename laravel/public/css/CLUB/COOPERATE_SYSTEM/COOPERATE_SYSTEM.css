@@ -3,55 +3,88 @@
     width: 100%;
     height: 100%;
 }
-
-.activity>div{
-    height: 100vh;
+.pageTitle{
+    font-family: fantasy;
     width: 100%;
-    border-bottom: 1px black solid;
+    font-size: 65px;
+    text-align: center;
+    color: #f0f2f5;
+    margin: 50px 0;
+    box-sizing: border-box;
+    background-color: #343959;
+
+}
+.activity>div{
+    height: 600px;
+    width: 100%;
 }
 
-#rnr,#cod{
+.rnr,.cod{
     width: 50%;
-    height: 100%;
-    background-color: beige;
+    height: 630px;
     float: left;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 30px 70px;
+
 }
-#request,#receive{
+.request,.receive{
     border: 2px black solid;
     height: 190px;
-    background-color: white;
-    overflow: auto;
+    background-color: #656c8f;
+    overflow-y: auto;
+    color: white;
 }
 
+.document-list{
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background-color: #656c8f;
+    height: 457px;
+    border: 2px black solid;
+    color: white;
+    overflow-y: auto;
+}
+.document{
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+}
+.document-icon{
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.document-title{
+    width: 210px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
 
-#cod table{
-    border: 1px black solid;
+.timeline{
+    padding: 0 30px;
+    color: white;
+    width: 960px;
+    box-sizing: border-box;
     border-collapse: collapse;
 }
-
-#cod th,#cod td{
-    border: 1px black solid;
-    width: 150px;
-    text-align: center;
-    background-color: white;
-}
-
-tr td:first-child{
-    width: 300px;
-}
-
-#timeline{
-    padding: 30px;
-}
-#timeline table{
-    border: 1px black solid;
+table{
     border-collapse: collapse;
+    width: 890px;
 }
-#timeline th,#timeline td{
+td{
+    padding: 0 1px;
+}
+.table-head tr th, .table-body td{
     border: 1px black solid;
-    width: 178px;
+    width: 180px;
     text-align: center;
-    background-color: white;
+    background-color: #656c8f;
+    height: 30px;
+    padding-top: 4px;
+    box-sizing: border-box;
+    border-collapse: collapse;
 }

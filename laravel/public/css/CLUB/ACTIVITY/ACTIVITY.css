@@ -1,27 +1,49 @@
+#a-container {
+    display: flex;
+    flex-direction: column;
+}
 .activity{
     box-sizing: border-box;
-    padding: 80px 100px 100px;
+    padding: 0 100px 100px;
     width: 100%;
     height: auto;
 }
-
+.header{
+    margin-left: -98px;
+    width: 300px;
+    margin-bottom: 70px;
+}
+.activity-box{
+    display: flex;
+    flex-wrap: wrap;
+}
 .ACT{
     display: flex;
-    margin-bottom: 30px;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 40px 30px;
 }
 
 .a-media{
     box-sizing: border-box;
     background-color: black;
-    width: 400px;
-    height: 250px;
+    width: 300px;
+    height: 180px;
     display: flex;
     justify-content: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
-.a-caption{
-    background-color: blanchedalmond;
-    width: 380px;
-    height: 250px;
+.a-title{
+    height: 30px;
+    width: 300px;
+    background-color: #343959;
+    color: white;
     box-sizing: border-box;
-    padding: 20px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.3);
 }

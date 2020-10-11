@@ -108,11 +108,11 @@
                     </div>
                     <div class="detail">
                         <label>Application open at</label>
-                        <input type="date" v-model="openTime">
+                        <input type="date" v-model="openTime" :min="minOpen" @change="openCloseTime">
                     </div>
                     <div class="detail">
                         <label>Application close at</label>
-                        <input type="date" v-model="closeTime" :min="openTime">
+                        <input type="date" ref="closeTime" v-model="closeTime" :min="openTime" disabled>
                     </div>
                     <div class="detail">
                         <label>Target</label>
@@ -462,7 +462,7 @@
                         <input v-if="input" class="form-input input-file" type="file" multiple disabled/>
                         <ul v-if="!input" class="list">
                             <li v-for="i in value">
-                                <a class="fileLink" target="_blank" :href="'{{asset('public/storage/activity')}}'+'/'+ida+'/form'+idb+'/'+i">@{{ i }}</a>
+                                <a class="fileLink" target="_blank" :href="'{{asset('storage/app/public//activity')}}'+'/'+ida+'/form'+idb+'/'+i">@{{ i }}</a>
                             </li>
                         </ul>
                     </div>
@@ -597,6 +597,7 @@
                 name:'',
                 image:'',
                 caption:'',
+                minOpen:'',
                 openTime:'',
                 closeTime:'',
                 target:null,
@@ -654,7 +655,7 @@
                     this.actId = data['activity_id'];
                     this.caption=data['activity_caption'];
                     this.editMedia = true;
-                    let prefix = '{{asset('public/storage/activity')}}';
+                    let prefix = '{{asset('storage/app/public/activity')}}';
                     this.image = prefix + '/' + data['activity_image'];
                     this.name = data['activity_name'];
                     this.openTime = data['activity_apply_open'];
@@ -664,6 +665,15 @@
                     this.endTime = data['activity_end_time'];
                     //set form
                     this.setForm(JSON.parse(data['activity_application_form']));
+                },
+                openCloseTime(){
+                    if(this.openTime){
+                        this.$refs.closeTime.disabled = false;
+                        this.closeTime = '';
+                    }
+                    else{
+                        this.$refs.closeTime.disabled = true;
+                    }
                 },
                 setForm(data,value,id,actApplyId){
                     this.getInputList = data;
@@ -900,7 +910,8 @@
                 object.time = '{{$data['activity_created_at']}}';
                 Vue.set(this.showCheckList,this.showCheckList.length,object);
                 @endforeach
-            }
+                this.minOpen = new Date().toISOString().split("T")[0];
+            },
         });
     </script>
 @endsection

@@ -20,7 +20,6 @@ class CMSMediaController extends CMSCommonController
     public function upload(Request $request,$c){
         $array = [];
         if($c==1){
-            Storage::disk('public')->deleteDirectory("club/picture/temp");
             foreach ($request->allFiles() as $key => $media){
                 $name = $key.'M'.strtotime(now()).".".$media->getClientOriginalExtension();
                 array_push($array,$name);
@@ -28,7 +27,6 @@ class CMSMediaController extends CMSCommonController
             }
         }
         elseif($c==2){
-            Storage::disk('public')->deleteDirectory("club/video/temp");
             foreach ($request->allFiles() as $key => $media){
                 $name = $key.'M'.strtotime(now()).".".$media->getClientOriginalExtension();
                 array_push($array,$name);
@@ -61,7 +59,6 @@ class CMSMediaController extends CMSCommonController
     public function input(Request $request,$c){
         if($c==1){
             $imageval = $request->validate([
-                'imageActivity' => 'required',
                 'imageSet' => 'required'
             ]);
             if($imageval){
@@ -80,7 +77,6 @@ class CMSMediaController extends CMSCommonController
         }
         elseif($c==2){
             $videoval = $request->validate([
-                'videoActivity' => 'required',
                 'videoSet' => 'required'
             ]);
             if($videoval){

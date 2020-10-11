@@ -13,6 +13,10 @@ class CMSPostController extends CMSCommonController
 {
     public function CMSPost(){
         $getPost = ClubPost::all()->toArray();
+        foreach ($getPost as $key=>$data){
+            $getPost[$key]['updated_at']=date("Y-m_d H-i-sa",strtotime($data['updated_at']));
+        }
+
         return view('CLUB.MANAGEMENT_SYSTEM.POST_MANAGEMENT',compact('getPost'));
     }
     public function input(Request $request){
@@ -67,7 +71,9 @@ class CMSPostController extends CMSCommonController
             'post_title'=>$request['title'],
             'post_caption'=>$request['caption'],
         ]);
-        return response($request,200);
+        $getData = ClubPost::select('*')->where('post_id',$postId)->get()->toArray();
+        $getData[0]['updated_at']=date("Y-m_d H-i-sa",strtotime($getData[0]['updated_at']));
+        return response($getData[0],200);
     }
 
     public function delete(Request $request){

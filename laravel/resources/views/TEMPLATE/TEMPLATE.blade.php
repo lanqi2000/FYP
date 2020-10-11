@@ -2,6 +2,8 @@
 <html>
     <head id="head">
         <meta charset="utf-8">
+{{--        <meta name="viewport" content="width=device-width,initial-scale=1.0">--}}
+{{--        <meta http-equiv="X-UA-Compatible" content="ie=edge">--}}
         <script src="https://unpkg.com/vue/dist/vue.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <link rel="stylesheet" href="{{asset('public/css/TEMPLATE.css')}}">
@@ -74,17 +76,15 @@
                 </div>
             </transition>
         </div>
-
-
-        <header>
+        <header id="header">
             <div class="login">
-                <a href="#">login</a>
-                <a href="#">register</a>
+                <a href="{{url('/login')}}">Login</a>
+                <a href="{{url('/pProfile')}}">Profile</a>
             </div>
             <div class="loggedin"></div>
-            <div class="hd">
+            <a class="hd" href="{{asset('/')}}" style="text-decoration: none; color: black">
                 C<spam>lub</spam> I<spam>nteraction</spam> P<spam>latform</spam>
-            </div>
+            </a>
             <br/>
         </header>
         <section>
@@ -92,13 +92,6 @@
                 @yield('b-template')
             </div>
         </section>
-        <!--message-->
-        <div id="c-container">
-            <div id="message" @click="message_show">
-                <img src="{{asset('resources/views/TEMPLATE/ICON/chat.png')}}" width="30px" style="filter: invert(100%)">
-            </div>
-            <div class="chat" v-if="chat">New message</div>
-        </div>
     </body>
     <script>
         var bus = new Vue();
@@ -116,21 +109,13 @@
                 setTimeout(this.loading,500);
             }
         });
-        var message = new Vue({
-            el:'#c-container',
+        var head = new Vue({
+            el:'#header',
             data:{
-                chat:false,
-            },
-            methods:{
-                message_show(){
-                    bus.$emit("message",false);
-                    this.chat=!this.chat;
-                }
+
             },
             mounted() {
-                bus.$on("arf",()=>{
-                    this.chat = false;
-                })
+                {{--console.log('{{session('user')['user_id']}}');--}}
             }
         });
     </script>

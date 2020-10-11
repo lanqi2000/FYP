@@ -32,7 +32,7 @@
                             <td>
                                 <div class="post-list-body" style="width: 800px">
                                     <table>
-                                        <check-list v-for="(checklist,key) in showchecklist" :listkey="key" :postid="checklist.postId" :posttitle="checklist.title" :createdtime="checklist.time" @postdata="setPost"></check-list>
+                                        <check-list v-for="(checklist,key) in showchecklist" :listkey="key" :postid="checklist.postId" :posttitle="checklist.title" :createdtime="checklist.time" @delete="postDelete" @postdata="setPost"></check-list>
                                     </table>
                                 </div>
                             </td>
@@ -79,6 +79,12 @@
         <transition name="flash">
             <div class="submited" v-if="submited_show">Posted</div>
         </transition>
+        <transition name="flash">
+            <div class="submited" v-if="save">Saved</div>
+        </transition>
+        <transition name="flash">
+            <div class="submited" v-if="fail" style="background-color: #f70000; width: 250px;">Please Complete the Post</div>
+        </transition>
     </div>
 @endsection
 @section('s-ctemplate')
@@ -96,7 +102,7 @@
                 <tr v-if="status" :class="{clecklistselect:select}">
                     <td class="post-list-element" style="width: 43px; text-align: center;">@{{listkey+1}}</td>
                     <td class="post-list-element" style="width: 400px;">@{{posttitle}}</td>
-                    <td class="post-list-element" style="width: 200px;">@{{createdtime}}</td>
+                    <td class="post-list-element" style="width: 210px;">@{{createdtime}}</td>
                     <td class="post-list-element" style="width: 80px; text-align: center;">
                         <div class="post-edit-button" @click="postData(postid)">Edit</div>
                     </td>
@@ -111,7 +117,10 @@
                     if(status===true){
                         axios.post('{{url('/club/cmsPost-delete')}}',{
                             postId : postid
-                        }).then(response => this.status = false);
+                        }).then(response => {
+                            this.status = false;
+                            this.$emit('delete',postid);
+                        });
                     }
                     else{
                         this.select = false;
@@ -148,6 +157,8 @@
                 videoShow:false,
                 arrowShow:false,
                 submited_show:false,
+                fail:false,
+                save:false,
 
                 showchecklist:[],
             },
@@ -169,6 +180,14 @@
                         }
                     }
                 },
+                postDelete(id){
+                    this.postEditUI= false;
+                    for(let i in this.showchecklist){
+                        if(this.showchecklist[i].postId==id){
+                            this.showchecklist.splice(i,1);
+                        }
+                    }
+                },
                 setPost(data){
                     this.postEditUI = true;
                     this.postid = data['post_id'];
@@ -179,7 +198,7 @@
                     if(this.media.length>1){
                         this.arrowShow = true;
                     }
-                    let prefix = '{{asset('public/storage/')}}';
+                    let prefix = '{{asset('storage/app/public/')}}';
                     this.mediaView = prefix + '/' + this.media[0];
                     this.mediaType = this.mediaView.split(".").pop();
                     if (this.mediaType === 'mp4') {
@@ -235,7 +254,7 @@
                     this.mediaView = this.media[this.mediaKey];
                     if(this.media[this.mediaKey].substr(0,4)=='post'){
                         console.log(this.media[this.mediaKey].substr(0,4));
-                        let prefix = '{{asset('public/storage/')}}';
+                        let prefix = '{{asset('storage/app/public/')}}';
                         this.mediaView = prefix + '/' + this.media[this.mediaKey];
                         this.mediaType = this.media[this.mediaKey].split(".").pop();
                         if(this.mediaType==='mp4'){
@@ -260,7 +279,7 @@
                     }
                     if(this.media[this.mediaKey].substr(0,4)=='post'){
                         console.log(this.media[this.mediaKey].substr(0,4));
-                        let prefix = '{{asset('public/storage/')}}';
+                        let prefix = '{{asset('storage/app/public/')}}';
                         this.mediaView = prefix + '/' + this.media[this.mediaKey];
                         this.mediaType = this.media[this.mediaKey].split(".").pop();
                         if(this.mediaType==='mp4'){
@@ -282,6 +301,8 @@
                 },
                 show_off(){
                     this.submited_show = false;
+                    this.fail = false;
+                    this.save= false;
                 },
                 reset(){
                     this.title= '';
@@ -298,7 +319,11 @@
                     let object = {}
                     object.postId = response.data['post_id'];
                     object.title = response.data['post_title'];
-                    object.time = response.data['created_time'];
+                    if(response.data['updated_at']){
+                        object.time = response.data['updated_at'];
+                    }else{
+                        object.time = response.data['created_time'];
+                    }
                     Vue.set(this.showchecklist,this.showchecklist.length,object)
                 },
                 createPost(){
@@ -313,9 +338,16 @@
                             headers: {
                                 "Content-Type": "multipart/form-data"
                             }
-                        }).then(response => this.submited(response)).catch(function (error) {
-                            console.log(error);
+                        }).then(response => {
+                            console.log('ok');
+                            this.fail = false;
+                            this.submited(response);
+                        }).catch(function (error) {
+                            console.log(error.response);
                         });
+                    }else {
+                        this.fail = true;
+                        setTimeout(this.show_off, 3000);
                     }
                 },
                 editPost(){
@@ -333,9 +365,32 @@
                             headers: {
                                 "Content-Type": "multipart/form-data"
                             }
-                        }).then(response => console.log(response)).catch(function (error) {
-                            console.log(error.response.data);
-                        });
+                        })
+                            .then(response => {
+                                console.log(response);
+                                for(let i in this.showchecklist){
+                                    if(this.showchecklist[i].postId==response.data['post_id']){
+                                        let object = {}
+                                        object.postId = response.data['post_id'];
+                                        object.title = response.data['post_title'];
+                                        if(response.data['updated_at']){
+                                            object.time = response.data['updated_at'];
+                                        }else{
+                                            object.time = response.data['created_time'];
+                                        }
+                                        Vue.set(this.showchecklist,i,object)
+                                    }
+                                }
+                                this.fail = false;
+                                this.save = true;
+                                setTimeout(this.show_off,4000);
+                            })
+                            .catch(function (error) {
+                                console.log(error.response.data);
+                            });
+                    }else{
+                        this.fail = true;
+                        setTimeout(this.show_off,3000);
                     }
                 }
             },
@@ -351,7 +406,11 @@
                     object = {};
                     object.postId = '{{$data['post_id']}}';
                     object.title = '{{$data['post_title']}}';
-                    object.time = '{{$data['created_time']}}';
+                    @if(!empty($data['updated_at']))
+                        object.time = '{{$data['updated_at']}}';
+                    @else
+                        object.time = '{{$data['created_time']}}';
+                    @endif
                     Vue.set(this.showchecklist,this.showchecklist.length,object);
                 @endforeach
             }

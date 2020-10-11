@@ -1,12 +1,12 @@
 @extends('TEMPLATE.TEMPLATE')
 @section('h-template')
-<link rel="stylesheet" href="{{asset('public/css/PERSONAL_PROFILE.css')}}">
+    <link rel="stylesheet" href="{{asset('public/css/PERSONAL_PROFILE.css')}}">
 @endsection
 @section('b-template')
     <div id="profile">
         <div class="pro-container">
             <h1 class="header" style="text-align: center">MY PROFILE</h1>
-            <form method="post" style="display: flex;flex-direction: row;" action="{{url('/pProfile_input')}}" enctype="multipart/form-data" target="postHere" @submit="submited">
+            <form method="post" style="display: flex;flex-direction: row;">
                 <div class="profile-column">
                     <div style="border: 3px solid #343959; width:150px; height:150px; margin: 0 auto">
                             <img :src="picture" height="150px" width="150px" >
@@ -47,11 +47,10 @@
                     <div class="finalStep">
                         <div class="myButton_small" @click="submit">Save</div>
                         <input type="reset" class="myButton_small" @click="reset">
-                        <div @click="window.history.back()" class="myButton_small">Cancel</div>
+                        <a href="{{asset('/')}}" class="myButton_small">Cancel</a>
                     </div>
                 </div>
             </form>
-            <iframe name="postHere" ref="submit" style="display:none;" ></iframe>
         </div>
         <transition name="flash">
             <div class="submited" v-if="submited_show">Saved</div>
@@ -81,7 +80,7 @@
         methods:{
             setData(){
                 if('{{$data['user_picture']}}'!==''){
-                    this.picture = '{{asset('public/storage/profilePic/'.$data['user_picture'])}}';
+                    this.picture = '{{asset('storage/app/public/profilePic/'.$data['user_picture'])}}';
                 }
             },
             preview(e){

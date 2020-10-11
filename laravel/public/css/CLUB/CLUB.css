@@ -28,30 +28,67 @@
     box-shadow: 0 2px 3px 0 rgba(0,0,0,0.4);
 }
 
-.banner{
-    display: flex;
-    justify-content: center;
+/*advertisement*/
+#advertisement{
+    position: relative;
 }
 
-.arrowBanner {
-    width: 30px;
-    background-color: #343959;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
+.slider {
+    margin: 0 auto;
+    max-width: 940px;
+}
+
+.slide_viewer {
+    overflow: hidden;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
+    margin-bottom: 15px;
+}
+.slide-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: all 0.3s ease-out;
+}
+.slide_group {
+    width: 900px;
+    height: 400px;
+    margin: 20px 30px;
+    background-color: black;
+}
+.banner-container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.banner{
+    max-width: 900px;
+    max-height: 400px;
+    width: auto;
+    height: auto;
 }
 
-.arrowBanner:hover{
-    transition: all;
-    transition-duration: 300ms;
-    background-color: #656c8f;
+.previous_btn {
+    left: 50px;
 }
-.b-img{
-    width: 900px;
-    height: 300px;
+
+.next_btn {
+    right: 50px;
+}
+
+.previous_btn, .next_btn {
+    cursor: pointer;
+    opacity: 0.5;
+    filter: invert(100%);
+    transition: opacity 0.4s ease-in-out;
+    position: absolute;
+}
+
+.previous_btn:hover, .next_btn:hover {
+    opacity: 1;
+    filter: contrast(200%);
 }
 /*post*/
 #p-container{

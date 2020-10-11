@@ -85,7 +85,7 @@
                 navData4:[
                         {
                             navname:'History Management',
-                            navicon:'{{asset('resources/views/CTEMPLATE/ICON/Media.png')}}',
+                            navicon:'{{asset('resources/views/CTEMPLATE/ICON/History.png')}}',
                             navlink:'{{url("/club/cmsHistory")}}',
                             navStatus:false
                         },

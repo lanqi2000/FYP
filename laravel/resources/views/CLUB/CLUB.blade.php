@@ -15,18 +15,43 @@
         </div>
     </div>
 
-    <div class="banner">
-        <div class="arrowBanner"><</div>
-        <div class="b-img">
-            <img src="{{asset('resources/views/IMAGE/BANNER.jpg')}}" width="900px" height="300px">
+    <div id="advertisement">
+        <div class="slide_viewer">
+            <div class="slide-container" :style="{marginLeft:'-' + positionBanner + 'px'}">
+                <div class="slide_group" v-for="banner in bannerSet">
+                    <a class="banner-container" :href="banner.image" target="_blank"><img class="banner" :src="banner.link" alt=""></a>
+                </div>
+            </div>
+            <div class="previous_btn" title="Previous" @click="moveToLeft">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="35px" height="35px" viewBox="-11 -11.5 65 66">
+                    <g>
+                        <g>
+                            <path fill="#474544" d="M-10.5,22.118C-10.5,4.132,4.133-10.5,22.118-10.5S54.736,4.132,54.736,22.118
+                  c0,17.985-14.633,32.618-32.618,32.618S-10.5,40.103-10.5,22.118z M-8.288,22.118c0,16.766,13.639,30.406,30.406,30.406 c16.765,0,30.405-13.641,30.405-30.406c0-16.766-13.641-30.406-30.405-30.406C5.35-8.288-8.288,5.352-8.288,22.118z"/>
+                            <path fill="#474544" d="M25.43,33.243L14.628,22.429c-0.433-0.432-0.433-1.132,0-1.564L25.43,10.051c0.432-0.432,1.132-0.432,1.563,0	c0.431,0.431,0.431,1.132,0,1.564L16.972,21.647l10.021,10.035c0.432,0.433,0.432,1.134,0,1.564	c-0.215,0.218-0.498,0.323-0.78,0.323C25.929,33.569,25.646,33.464,25.43,33.243z"/>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <div class="next_btn" title="Next" @click="moveToRight">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="35px" height="35px" viewBox="-11 -11.5 65 66">
+                    <g>
+                        <g>
+                            <path fill="#474544" d="M22.118,54.736C4.132,54.736-10.5,40.103-10.5,22.118C-10.5,4.132,4.132-10.5,22.118-10.5	c17.985,0,32.618,14.632,32.618,32.618C54.736,40.103,40.103,54.736,22.118,54.736z M22.118-8.288	c-16.765,0-30.406,13.64-30.406,30.406c0,16.766,13.641,30.406,30.406,30.406c16.768,0,30.406-13.641,30.406-30.406 C52.524,5.352,38.885-8.288,22.118-8.288z"/>
+                            <path fill="#474544" d="M18.022,33.569c 0.282,0-0.566-0.105-0.781-0.323c-0.432-0.431-0.432-1.132,0-1.564l10.022-10.035 			L17.241,11.615c 0.431-0.432-0.431-1.133,0-1.564c0.432-0.432,1.132-0.432,1.564,0l10.803,10.814c0.433,0.432,0.433,1.132,0,1.564 L18.805,33.243C18.59,33.464,18.306,33.569,18.022,33.569z"/>
+                        </g>
+                    </g>
+                </svg>
+            </div>
         </div>
-        <div class="arrowBanner">></div>
     </div>
 
     <div id="p-container">
-        @foreach($dataset as $key=>$data)
-            <post :postid="'{{$data['post_id']}}'" :title="'{{$data['post_title']}}'" :caption="'{{$data['post_caption']}}'" :mediaset="'{{$data['post_media']}}'" :like="'{{$data['post_like']}}'" :comments="'{{$data['post_comment']}}'"></post>
-        @endforeach
+        @if($dataset!=[])
+            @foreach($dataset as $key=>$data)
+                <post :postid="'{{$data['post_id']}}'" :title="'{{$data['post_title']}}'" :caption="'{{$data['post_caption']}}'" :mediaset="'{{$data['post_media']}}'" :totallike="'{{$data['post_total_like']}}'" :like="'{{$data['post_like']}}'" :comments="'{{$data['post_comment']}}'"></post>
+            @endforeach
+        @endif
         <iframe name="postHere" style="display: none" ></iframe>
     </div>
 @endsection
@@ -76,7 +101,7 @@
             }
         });
         Vue.component('post',{
-            props:['postid','title','caption','mediaset','like','comments',],
+            props:['postid','title','caption','mediaset','like','comments','totallike'],
             data:function (){
                 return{
                     media:[],
@@ -91,6 +116,7 @@
                     //post interact
                     love:false,
                     likes:this.like,
+                    totalLike:0,
 
                     commentMore:false,
                     commentKeep:false,
@@ -113,8 +139,9 @@
                 </div>
                 <div class="post-interact">
                     <div class="post-panel">
+                        <div style="margin-left: 5px">@{{ totalLike }}</div>
                         <form method="post" action="{{url('/club/club-input-like')}}" target="postHere">
-                            <label style="height: 25px;width: 25px;margin: 10px;"><input type="image" class="love" style="margin: 0;" src="{{asset('resources/views/ICON/heart.png')}}" :class="{loveit:love}" @click="loveIt"></label>
+                            <label style="height: 25px;width: 25px;margin: 10px;"><input type="image" class="love" style="margin: 3px 0 0;" src="{{asset('resources/views/ICON/heart.png')}}" :class="{loveit:love}" @click="loveIt"></label>
                             <input type="hidden" name="love" :value="likes" >
                             <input type="hidden" name="post_id" :value="postid" >
                         </form>
@@ -142,8 +169,16 @@
                         <div class="preview" ref="caption" :class="{captionOverflow:more}" style="overflow-wrap: break-word; width: 580px;">@{{caption}}</div>
                     </div>
                     <footer class="post-footer">
-                        <div class="post-date">{{$data['created_time']}}</div>
-                        <div class="more-keep" v-if="more" @click="moreKeep">more</div>
+                        <div class="post-date">
+                        @if($dataset!=[])
+                            @if(!empty($data['updated_at']))
+                                {{$data['updated_at']}}
+                            @else
+                                {{$data['created_time']}}
+                            @endif
+                        @endif
+                        </div>
+                        <div class="mmore-keep" v-if="more" @click="moreKeep">more</div>
                         <div class="more-keep" v-if="keep" @click="moreKeep">keep</div>
                     </footer>
                 </div>
@@ -157,7 +192,7 @@
                 },
                 preset(){
                     this.media = JSON.parse(this.mediaset);
-                    let prefix = '{{asset('public/storage/')}}';
+                    let prefix = '{{asset('storage/app/public/')}}';
                     this.mediaView = prefix + '/' + this.media[0];
                     this.mediaType = this.mediaView.split(".").pop();
                     if (this.mediaType === 'mp4') {
@@ -178,6 +213,7 @@
                     else{
                         this.likes = 0;
                     }
+                    this.totalLike = this.totallike;
                     this.setComment()
                 },
                 setComment(){
@@ -243,7 +279,7 @@
                     if (this.mediaKey > 0){
                         this.mediaKey--;
                     }
-                    let prefix = '{{asset('public/storage/')}}';
+                    let prefix = '{{asset('storage/app/public/')}}';
                     this.mediaView = prefix + '/' + this.media[this.mediaKey];
                     this.mediaType = this.media[this.mediaKey].split(".").pop();
                     if(this.mediaType==='mp4'){
@@ -257,7 +293,7 @@
                     if (this.mediaKey < this.media.length-1){
                         this.mediaKey++;
                     }
-                    let prefix = '{{asset('public/storage/')}}';
+                    let prefix = '{{asset('storage/app/public/')}}';
                     this.mediaView = prefix + '/' + this.media[this.mediaKey];
                     this.mediaType = this.media[this.mediaKey].split(".").pop();
                     if(this.mediaType==='mp4'){
@@ -271,9 +307,11 @@
                     this.love = !this.love;
                     if(this.likes==1){
                         this.likes = 0;
+                        this.totalLike--;
                     }
                     else{
                         this.likes = 1;
+                        this.totalLike++;
                     }
 
                 },
@@ -324,6 +362,54 @@
                 title:'TEETH CLUB',
                 pageDiscribe: 'teeth club is very interest'
             },
+        });
+
+        let advertisement = new Vue({
+            el:"#advertisement",
+            data:{
+                bannerSet:[],
+                defaultWidth:960,
+                banner:0,
+                positionBanner:0
+            },
+            methods:{
+                change(){
+                    if(this.banner < this.bannerSet.length-1){
+                        this.banner++;
+                    }else{
+                        this.banner = 0;
+                    }
+                    this.positionBanner = this.defaultWidth * this.banner;
+                    setTimeout(this.change,4000);
+                },
+                moveToLeft(){
+                    if (this.banner !== 0) {
+                        this.banner--;
+                    } else {
+                        this.banner = this.bannerSet.length-1;
+                    }
+                    this.positionBanner = this.defaultWidth * this.banner;
+
+                },
+                moveToRight(){
+                    if (this.banner < this.bannerSet.length-1) {
+                        this.banner++;
+                    } else {
+                        this.banner = 0;
+                    }
+                    this.positionBanner = this.defaultWidth * this.banner;
+                }
+            },
+            mounted() {
+                let object = {};
+                @foreach($getAds as $key=>$ads)
+                    object = {};
+                    object.image = '{{url("/club/rActivity/").'/'.$ads['activity_id']}}';
+                    object.link = '{{asset('storage/app/public/advertisement').'/'.$ads['advertisement_picture']}}';
+                    Vue.set(this.bannerSet,this.bannerSet.length,object);
+                @endforeach
+                setTimeout(this.change,5000);
+            }
         });
 
         var post = new Vue({

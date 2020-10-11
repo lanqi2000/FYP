@@ -8,7 +8,7 @@
             <h1 class="header">RECENT ACTIVITY</h1>
             <div class="activity-box">
                 @foreach($currentActivity as $data)
-                    <activity-box :link="'{{url('club/rActivity/'.$data['activity_id'])}}'" :image="'{{asset('/public/storage/activity/'.$data['activity_image'])}}'" :name="'{{$data['activity_name']}}'"></activity-box>
+                    <activity-box :link="'{{url('club/rActivity/'.$data['activity_id'])}}'" :image="'{{asset('storage/app/public/activity/'.$data['activity_image'])}}'" :name="'{{$data['activity_name']}}'"></activity-box>
                 @endforeach
             </div>
         </div>
@@ -16,7 +16,7 @@
             <h1 class="header" >PASSED ACTIVITY</h1>
             <div class="activity-box">
                 @foreach($passedActivity as $data)
-                    <activity-box :link="'{{url('club/pActivity/'.$data['activity_id'])}}'" :image="'{{asset('/public/storage/activity/'.$data['activity_image'])}}'" :name="'{{$data['activity_name']}}'"></activity-box>
+                    <activity-box :link="'{{url('club/pActivity/'.$data['activity_id'])}}'" :image="'{{asset('storage/app/public/activity/'.$data['activity_image'])}}'" :name="'{{$data['activity_name']}}'"></activity-box>
                 @endforeach
             </div>
         </div>

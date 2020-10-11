@@ -1,32 +1,164 @@
-.ads-management{
+#advertisement-management{
     display: flex;
     flex-direction: column;
 }
-.ads-preview{
+.am-option{
+    height: 40px;
+    padding: 20px 25px;
+    box-sizing: border-box;
+    background-color: #343959;
+    color: white;
     display: flex;
     justify-content: center;
-    width: 100%;
+    align-items: center;
+    cursor: pointer;
 }
-.ads-image{
+.selected{
+    background-color: #656c8f;
+    cursor: default;
+}
+
+.slider {
+    max-width: 940px;
+}
+
+.slide_group {
+    width: 900px;
+    height: 400px;
+    margin: 20px 30px;
+    background-color: black;
     display: flex;
+    justify-content: center;
     align-items: center;
     position: relative;
-    margin-top: 30px;
 }
-.arrow{
+.slide-no{
+    position: absolute;
+    background-color: #656c8f;
+    font-size: 25px;
+    width: 40px;
+    height: 40px;
+    font-weight: bold;
+    left: 0;
+    top: 0;
+    border-bottom-right-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: bold;
-    font-size: 30px;
     color: white;
-    opacity: 0.5;
-    position: absolute;
-    cursor: pointer;
-    height: 22px;
 }
-.arrow:hover{
+.banner-container{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.banner{
+    max-width: 900px;
+    max-height: 400px;
+    width: auto;
+    height: auto;
+}
+
+.ads-panel{
+    width: 900px;
+    background-color: #343959;
+    margin: 0 auto 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+}
+.adsPicture-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    padding-top: 20px;
+}
+.myButton{
+    text-align: center;
+}
+.adsLink-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+/*delete*/
+#advertisement{
+    position: relative;
+}
+
+.slider {
+    max-width: 940px;
+}
+
+.slide_viewer {
+    /*overflow: hidden;*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.slide-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: all 0.3s ease-out;
+}
+.previous_btn {
+    left: 50px;
+}
+.next_btn {
+    right: 50px;
+}
+.previous_btn, .next_btn {
+    cursor: pointer;
+    opacity: 0.5;
+    filter: invert(100%);
+    transition: opacity 0.4s ease-in-out;
+    position: absolute;
+}
+.previous_btn:hover, .next_btn:hover {
     opacity: 1;
     filter: contrast(200%);
-    transition: all 0.3s;
+}
+
+.ads-delete{
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+.ads-delete-table{
+    width: 700px;
+    background-color: #181c3f;
+}
+.ads-delete-head{
+    background-color: #3C4161;
+}
+.ads-delete-body{
+    background-color: #656C8F;
+}
+.clecklistselect{
+    background-color: indianred;
+}
+.ads-delete-button{
+    background-color: rgb(208, 33, 28);
+    border-radius: 5px;
+    height: 25px;
+    width: 70px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+
+.myButton_small{
+    margin: 0 auto;
+    background-color: #343959;
+    color: white;
 }

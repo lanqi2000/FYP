@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 class TemplateController extends Controller
 {
     public function template(){
-        return view('TEMPLATE.TEMPLATE');
+        $user = session()->get('user');
+        dd($user);
+        return view('TEMPLATE.TEMPLATE')->with('user',$user);
     }
     public function ctemplate(){
         return view('CTEMPLATE.CTEMPLATE');

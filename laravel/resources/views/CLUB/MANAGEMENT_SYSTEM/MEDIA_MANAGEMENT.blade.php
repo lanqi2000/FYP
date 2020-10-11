@@ -1,6 +1,7 @@
 @extends('CTEMPLATE.CTEMPLATE')
 @section('h-ctemplate')
     <link rel="stylesheet" href="{{asset('public/css/CLUB/MANAGEMENT_SYSTEM/MEDIA_MANAGEMENT.css')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('b-ctemplate')
     <h1 class="header" style="width: 360px">MEDIA MANAGEMENT</h1>
@@ -19,7 +20,7 @@
                     <input type="file" ref="image" id="image" accept="image/jpeg,image/png" style="display: none;" @change="upload(1)" multiple>
                     <label class="myButton" for="image">+ Select Image</label>
                     <select class="activity-selection" v-model="imageActivity">
-                        <option value="0">Not Activity</option>
+                        <option value="" selected>Not Activity</option>
                         <option v-for="value in activities" :value="value.activity_id">@{{ value.activity_name }}</option>
                     </select>
                     <div class="myButton_small" @click="finalUpload(1)">Upload</div>
@@ -29,23 +30,33 @@
             <div class="mm-box">
                 <div class="mm-box-left">
                     <div class="preview-arrow" @click="changePreview(3)"><</div>
-                    <div class="preview">
-                        <video height="auto" style="outline:none;" width="100%" controls v-if="video">
+                    <div class="preview" @mouseover="playButton=true" @mouseleave="playButton=false" >
+                        <video height="auto" ref="v1" style="outline:none;" width="100%" v-if="video">
                             <source :src="video" type="video/mp4" />
                         </video>
+                        <img src="{{asset('resources/views/ICON/play.svg')}}" class="play" v-if="playButton && video" @click="play">
                     </div>
                     <div class="preview-arrow" @click="changePreview(4)">></div>
                 </div>
                 <div class="mm-box-right">
                     <input type="file" ref="video" id="video" accept="video/mp4" style="display: none;" @change="upload(2)" multiple>
-                    <label class="myButton" for="video">+ Select Image</label>
+                    <label class="myButton" for="video">+ Select Video</label>
                     <select class="activity-selection" v-model="videoActivity">
-                        <option value="0">Not Activity</option>
+                        <option value="" selected>Not Activity</option>
                         <option v-for="value in activities" :value="value.activity_id">@{{ value.activity_name }}</option>
                     </select>
                     <div class="myButton_small" @click="finalUpload(2)">Upload</div>
                 </div>
             </div>
+            <div class="videoBackground" v-if="playVideo"></div>
+            <div v-if="playVideo" class="videoShow">
+                <div class="preview-arrow" @click="changePreview(3)"><</div>
+                <video ref="v2" style="outline:none;" class="{playvideo:playVideo}" controls>
+                    <source :src="video" type="video/mp4"/>
+                </video>
+                <div class="preview-arrow" @click="changePreview(4)">></div>
+            </div>
+            <img src="{{asset('resources/views/ICON/exit.svg')}}" class="exit" v-if="playVideo" @click="playVideo=false" >
         </div>
         <transition name="flash">
             <div class="submited" v-if="pass">Successful</div>
@@ -67,9 +78,12 @@
                 imageActivity:null,
 
                 video:null,
-                videoHead:0,
+                video1Head:0,
+                video2Head:0,
                 videoSet:[],
                 videoActivity:null,
+                playButton:false,
+                playVideo:false,
 
                 activities:[],
 
@@ -80,6 +94,8 @@
                 upload(n){
                     let formData = new FormData;
                     if(n===1){
+                        console.log('upload');
+                        console.log(this.$refs.image.files);
                         for (let i in this.$refs.image.files){
                             formData.append(i,this.$refs.image.files[i]);
                             if(this.$refs.image.files[0]){
@@ -88,10 +104,10 @@
                                         console.log(response.data);
                                         this.imageSet.splice(0);
                                         this.image = null;
-                                        this.image = '{{asset('public/storage/club/picture/temp')}}'+'/'+response.data[0];
+                                        this.image = '{{asset('storage/app/public/club/picture/temp')}}'+'/'+response.data[0];
                                         this.imageSet = response.data;
                                     })
-                                    .catch(error=>error.response)
+                                    .catch(error=>console.log(error.response))
                             }
                         }
                     }else if(n===2){
@@ -100,43 +116,62 @@
                             if(this.$refs.video.files[0]){
                                 axios.post('/club/cmsMedia-upload/2',formData)
                                     .then(response=> {
-                                        this.videoSet.splice(0);
-                                        this.video = null;
-                                        this.video = '{{asset('public/storage/club/video/temp')}}'+'/'+response.data[0];
                                         this.videoSet = response.data;
+                                        this.video = null;
+                                        this.$refs.v1.src =
+                                            this.video = '{{asset('storage/app/public/club/video/temp')}}'+'/'+response.data[0]+'#t=0.5';
                                     })
-                                    .catch(error=>error.response)
+                                    .catch(error=>console.log(error.response))
                             }
                         }
                     }
                 },
                 changePreview(n){
-                    console.log()
                     if(this.imageSet.length>1){
                         switch (n){
                             case 1:
                                 if (this.imageHead!==0){
                                     this.imageHead--;
-                                    this.image = '{{asset('public/storage/club/picture/temp')}}'+'/'+this.imageSet[this.imageHead];
+                                    this.image = '{{asset('storage/app/public/club/picture/temp')}}'+'/'+this.imageSet[this.imageHead];
                                 }
                                 break;
                             case 2:
                                 if (this.imageHead!==this.imageSet.length-1){
                                     this.imageHead++;
-                                    this.image = '{{asset('public/storage/club/picture/temp')}}'+'/'+this.imageSet[this.imageHead];
+                                    this.image = '{{asset('storage/app/public/club/picture/temp')}}'+'/'+this.imageSet[this.imageHead];
                                 }
                                 break;
+                        }
+                    }
+                    else if(this.videoSet.length>1){
+                        switch (n){
                             case 3:
-                                if (this.videoHead!==0){
-                                    this.videoHead--;
-                                    this.video = '{{asset('public/storage/club/video/temp')}}'+'/'+this.videoSet[this.videoHead];
+                                if(this.playVideo){
+                                    if (this.video2Head!==0){
+                                        this.video2Head--;
+                                    }
+                                    this.$refs.v2.src = this.video = '{{asset('storage/app/public/club/video/temp')}}'+'/'+this.videoSet[this.video2Head]+'#t=0.5';
+                                }else {
+                                    if (this.video1Head!==0){
+                                        this.video1Head--;
+                                    }
+                                    this.$refs.v1.src = this.video = '{{asset('storage/app/public/club/video/temp')}}'+'/'+this.videoSet[this.video1Head]+'#t=0.5';
                                 }
+
                                 break;
                             case 4:
-                                if (this.videoHead!==this.videoSet.length-1){
-                                    this.videoHead++;
-                                    this.video = '{{asset('public/storage/club/video/temp')}}'+'/'+this.videoSet[this.videoHead];
+                                if(this.playVideo){
+                                    if (this.video2Head!==this.videoSet.length-1){
+                                        this.video2Head++;
+                                    }
+                                    this.$refs.v2.src = this.video = '{{asset('storage/app/public/club/video/temp')}}'+'/'+this.videoSet[this.video2Head]+'#t=0.5';
+                                }else {
+                                    if (this.video1Head!==this.videoSet.length-1){
+                                        this.video1Head++;
+                                    }
+                                    this.$refs.v1.src = this.video = '{{asset('storage/app/public/club/video/temp')}}'+'/'+this.videoSet[this.video1Head]+'#t=0.5';
                                 }
+
                                 break;
                         }
                     }
@@ -175,7 +210,7 @@
                                             console.log(error.response);
                                             this.pass=false;
                                             this.fail = true;
-                                            setTimeout(this.show_off, 3000);
+                                            setTimeout(this.show_off, 3000)
                                         })
                                 })
                                 .catch(error=>error.response)
@@ -198,7 +233,8 @@
                                             this.videoSet.splice(0);
                                             this.video = '';
                                             this.videoActivity = null;
-                                            this.videoHead = 0;
+                                            this.video1Head = 0;
+                                            this.video2Head = 0;
                                             this.fail=false;
                                             this.pass = true;
                                             setTimeout(this.show_off, 3000);
@@ -216,8 +252,11 @@
                                 .catch(error=>error.response)
                         }
                     }
-
-
+                },
+                play(){
+                    this.playVideo = true;
+                    this.video2Head = this.video1Head;
+                    this.$refs.v2.src = this.video = '{{asset('storage/app/public/club/video/temp')}}'+'/'+this.videoSet[this.video2Head]+'#t=0.5';
                 }
             },
             mounted() {

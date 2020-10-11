@@ -172,25 +172,6 @@
                     links:"{{url("/club/activity")}}",
                     icons:"{{asset('resources/views/CTEMPLATE/ICON/Activity.png')}}"
                 },
-
-                {
-                    titles:'CLUB HISTORY',
-                    status:false,
-                    links:"{{url("/club/history")}}",
-                    icons:"{{asset('resources/views/CTEMPLATE/ICON/History.png')}}"
-                },
-                {
-                    titles:'ABOUT CLUB',
-                    status:false,
-                    links:"{{url("/club/about")}}",
-                    icons:"{{asset('resources/views/CTEMPLATE/ICON/Info.png')}}"
-                },
-                {
-                    titles:'COOPERATE SYSTEM',
-                    status:false,
-                    links:"{{url("/club/cSystem")}}",
-                    icons:"{{asset('resources/views/CTEMPLATE/ICON/cooperate.png')}}"
-                },
                 {
                     titles:'CLUB MANAGEMENT',
                     status:false,
@@ -222,9 +203,14 @@
     });
     Vue.component('mediabox',{
         props:['mediaview','videoshow'],
-        template:`<video class="preview-media" height="auto" width="100%" controls v-if="videoshow"><source :src="mediaview" type="video/mp4" /></video>
+        template:`<video class="preview-media" ref="video" style="outline:none;" height="auto" width="100%" controls v-if="videoshow"><source :src="mediaview + '#t=0.5'" type="video/mp4" /></video>
                       <img class="preview-media" :src="mediaview" height="100%" v-else/>
                       `,
+        updated() {
+            if(this.videoshow){
+                this.$refs.video.src = this.mediaview + '#t=0.5';
+            }
+        }
     });
 </script>
 @yield('s-ctemplate')

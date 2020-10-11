@@ -36,7 +36,7 @@
                 el:'#a-container',
                 data:{
                     name:'{{$getData[0]['activity_name']}}',
-                    image:'{{asset("/public/storage/activity/".$getData[0]['activity_image'])}}',
+                    image:'{{asset("storage/app/public/activity/".$getData[0]['activity_image'])}}',
                     caption:'{{$getData[0]['activity_caption']}}'
                 }
             });
